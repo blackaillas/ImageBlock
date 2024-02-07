@@ -1,14 +1,24 @@
 {
   "name": "image-block",
-  "version": "0.0.0",
+  "version": "0.5.0",
+  "description": "Simple little component to display images in grid.",
+  "author": "Zoltán Rajkai",
+  "keywords": [
+    "angular",
+    "image",
+    "grid",
+    "quad"
+  ],
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-lib": "ng build ImageQuad --configuration production --watch"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
@@ -33,6 +43,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "ng-packagr": "^17.1.0",
     "typescript": "~5.2.2"
   }
 }

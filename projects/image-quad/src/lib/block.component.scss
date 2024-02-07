@@ -1,0 +1,11 @@
+.shadow {
+    box-shadow: inset gray 0px 0px 60px -12px;
+    border-radius: 7px;
+}
+
+img {
+    mix-blend-mode: multiply;
+    border-radius: 7px;
+    display: block;
+    border: 1px solid #bbb;
+}

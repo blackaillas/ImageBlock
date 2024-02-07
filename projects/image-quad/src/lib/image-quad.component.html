@@ -1,0 +1,31 @@
+<div class="q" [style.gap]="gap+'px'" *ngIf="setting" [@inOutAnimation] [@.disabled]="level > 1">
+
+  @if (isSubType(setting.q1)) {
+  <lib-imageQuad [setting]="castToSetting(setting.q1!)" [level]="level+1"></lib-imageQuad>
+  }@else {
+  <app-block [visible]="setting.q1===true" [size]="size" [level]="level" [gap]="gap"
+    [imageSource]="getImage()"></app-block>
+  }
+
+  @if (isSubType(setting.q2)) {
+  <lib-imageQuad [setting]="castToSetting(setting.q2!)" [level]="level+1"></lib-imageQuad>
+  }@else {
+  <app-block [visible]="setting.q2===true" [size]="size" [level]="level" [gap]="gap"
+    [imageSource]="getImage()"></app-block>
+  }
+
+  @if (isSubType(setting.q3)) {
+  <lib-imageQuad [setting]="castToSetting(setting.q3!)" [level]="level+1"></lib-imageQuad>
+  }@else {
+  <app-block [visible]="setting.q3===true" [size]="size" [level]="level" [gap]="gap"
+    [imageSource]="getImage()"></app-block>
+  }
+
+  @if (isSubType(setting.q4)) {
+  <lib-imageQuad [setting]="castToSetting(setting.q4!)" [level]="level+1"></lib-imageQuad>
+  }@else {
+  <app-block [visible]="setting.q4===true" [size]="size" [level]="level" [gap]="gap"
+    [imageSource]="getImage()"></app-block>
+  }
+
+</div>
