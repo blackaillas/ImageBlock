@@ -16,7 +16,7 @@ export class BlockComponent {
   @Input() imageSource: string = './assets/male_1.png';
 
   getSizeAsCssStyle(): string {
-    return `width: calc(${this.size / this.level}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px); height: calc(${this.size / this.level}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px)`;
+    return `width: calc(${this.size / (Math.pow(2, this.level-1))}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px); height: calc(${this.size / (Math.pow(2, this.level-1))}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px)`;
   }
 
 }

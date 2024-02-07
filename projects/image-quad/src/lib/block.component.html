@@ -1,3 +1,5 @@
-<div [class.shadow]="visible" [style]="getSizeAsCssStyle()">
-    <img *ngIf="visible" [src]="imageSource" alt="" [style]="getSizeAsCssStyle()">
+<div [style]="getSizeAsCssStyle()">
+    @if(visible) {
+        <div class="shadow" [style.background]="'center / contain no-repeat url('+ imageSource +')'"></div>
+    }
 </div>

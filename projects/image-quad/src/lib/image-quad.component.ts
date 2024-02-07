@@ -22,24 +22,12 @@ export interface Setting {
       grid-template: auto auto / auto auto;
   }`,
   animations: [
-    trigger('inOutAnimation',
-      [
-        transition(':enter',
-          [
-            style({ opacity: 0 }),
-            animate('2s ease-out',
-              style({ opacity: 1 }))
-          ]
-        ),
-        transition(':leave',
-          [
-            style({ opacity: 1 }),
-            animate('1s ease-in',
-              style({ opacity: 0 }))
-          ]
-        )
-      ]
-    )
+    trigger('simpleFadeAnimation', [
+      transition('*=>*', [
+          style({opacity: 0}),
+          animate('2s ease-in', style({opacity: 1}))
+      ])
+  ])
   ]
 })
 export class ImageQuadComponent implements OnChanges {
@@ -51,31 +39,18 @@ export class ImageQuadComponent implements OnChanges {
   @Input() imagePaths: string[] = [];
 
   ngOnInit() {
-    this.imagePaths = [
-      './assets/female_1.png',
-      './assets/female_2.png',
-      './assets/female_3.png',
-      './assets/female_4.png',
-      './assets/female_5.png',
-      './assets/female_6.png',
-      './assets/male_1.png',
-      './assets/male_2.png',
-      './assets/male_3.png',
-    ];
-    if (this.level === 1) {
-      setInterval(() => {
-        this.setting = undefined;
-        setTimeout(() => {
-          this.generateLayout();
-        }, 1000);
-      }, 10000);
-    }
+    // if (this.level === 1) {
+    //   setInterval(() => {
+    //     this.setting = undefined;
+    //     setTimeout(() => {
+    //       this.generateLayout();
+    //     }, 1000);
+    //   }, 10000);
+    // }
   }
 
   ngOnChanges() {
     this.generateLayout();
-
-
   }
 
   isSubType(value?: boolean | Setting): boolean {
