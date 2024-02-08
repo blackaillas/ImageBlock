@@ -1,31 +1,28 @@
-<div class="q" [style.gap]="gap+'px'" *ngIf="setting" [@simpleFadeAnimation]="imagePaths" [@simpleFadeAnimation]="setting" [@.disabled]="level > 1">
+<div class="q" [style.gap.px]="gap" *ngIf="layout" [@simpleFadeAnimation]="imagePaths" [@simpleFadeAnimation]="layout"
+  [@.disabled]="level > 1">
 
-  @if (isSubType(setting.q1)) {
-  <lib-imageQuad [setting]="castToSetting(setting.q1!)" [level]="level+1" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType(layout.q1)) {
+  <lib-imageQuad [mode]="castToLayout(layout.q1!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
   }@else {
-  <app-block [visible]="setting.q1===true" [size]="size" [level]="level" [gap]="gap"
-    [imageSource]="getImage()"></app-block>
+  <app-block [visible]="layout.q1===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
   }
 
-  @if (isSubType(setting.q2)) {
-  <lib-imageQuad [setting]="castToSetting(setting.q2!)" [level]="level+1" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType(layout.q2)) {
+  <lib-imageQuad [mode]="castToLayout(layout.q2!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
   }@else {
-  <app-block [visible]="setting.q2===true" [size]="size" [level]="level" [gap]="gap"
-    [imageSource]="getImage()"></app-block>
+  <app-block [visible]="layout.q2===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
   }
 
-  @if (isSubType(setting.q3)) {
-  <lib-imageQuad [setting]="castToSetting(setting.q3!)" [level]="level+1" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType(layout.q3)) {
+  <lib-imageQuad [mode]="castToLayout(layout.q3!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
   }@else {
-  <app-block [visible]="setting.q3===true" [size]="size" [level]="level" [gap]="gap"
-    [imageSource]="getImage()"></app-block>
+  <app-block [visible]="layout.q3===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
   }
 
-  @if (isSubType(setting.q4)) {
-  <lib-imageQuad [setting]="castToSetting(setting.q4!)" [level]="level+1" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType(layout.q4)) {
+  <lib-imageQuad [mode]="castToLayout(layout.q4!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
   }@else {
-  <app-block [visible]="setting.q4===true" [size]="size" [level]="level" [gap]="gap"
-    [imageSource]="getImage()"></app-block>
+  <app-block [visible]="layout.q4===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
   }
 
 </div>

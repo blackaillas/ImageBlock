@@ -2,16 +2,20 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlockComponent } from './block.component';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { fixedLayouts } from './fixed-layouts';
 
-export type Mode = 'fullRandom' | 'random' | 'fixedOne' | 'fixedTwo' | 'fixedThree';
+export type Mode = 'fullRandom' | 'random' | 'fixedOne' | 'fixedTwo' | 'fixedThree' | Layout;
 
-export interface Setting {
-  q1?: boolean | Setting;
-  q2?: boolean | Setting;
-  q3?: boolean | Setting;
-  q4?: boolean | Setting;
+export interface Layout {
+  q1?: boolean | Layout;
+  q2?: boolean | Layout;
+  q3?: boolean | Layout;
+  q4?: boolean | Layout;
 }
 
+/**
+ * Simple little component to display images in a grid with fashion.
+ */
 @Component({
   selector: 'lib-imageQuad',
   standalone: true,
@@ -24,48 +28,48 @@ export interface Setting {
   animations: [
     trigger('simpleFadeAnimation', [
       transition('*=>*', [
-          style({opacity: 0}),
-          animate('2s ease-in', style({opacity: 1}))
+        style({ opacity: 0 }),
+        animate('2s ease-in', style({ opacity: 1 }))
       ])
-  ])
+    ])
   ]
 })
 export class ImageQuadComponent implements OnChanges {
-  @Input() setting?: Setting = undefined;
-  @Input() mode: Mode = 'fullRandom';
+  /** Configure the behaviour of the layout with fixed predefined ones or with custom setups. 
+   * Also can use random layouts. 
+   * @type 'fullRandom' | 'random' | 'fixedOne' | 'fixedTwo' | 'fixedThree' | Layout
+   * */
+  @Input({ required: true }) mode: Mode = 'fullRandom';
+  /** The list of images that will be randomly selected. E.g.: ./assets/image.png */
+  @Input({ required: true }) imagePaths: string[] = [];
+  /** Size of level 1 image in pixel */
   @Input() size: number = 160; // in px
-  @Input() level: number = 1;
+  /** Gap between the images in pixel */
   @Input() gap: number = 4; // in px
-  @Input() imagePaths: string[] = [];
+  /** Do NOT set this manually */
+  @Input() level: number = 1;
 
-  ngOnInit() {
-    // if (this.level === 1) {
-    //   setInterval(() => {
-    //     this.setting = undefined;
-    //     setTimeout(() => {
-    //       this.generateLayout();
-    //     }, 1000);
-    //   }, 10000);
-    // }
-  }
+  layout?: Layout = undefined;
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.generateLayout();
   }
 
-  isSubType(value?: boolean | Setting): boolean {
+  isSubType(value?: boolean | Layout): boolean {
     return typeof value === 'object';
   }
 
-  castToSetting(value: boolean | Setting): Setting {
-    return value as Setting;
+  castToLayout(value: boolean | Layout): Layout {
+    return value as Layout;
   }
 
-  getImage(): string {
+  getImage(): string | undefined {
+    if (!this.imagePaths || this.imagePaths.length === 0) return undefined;
+
     return this.imagePaths[(Math.floor(Math.random() * this.imagePaths.length))];
   }
 
-  private getRandomQuadrant(): Setting {
+  private getRandomQuadrant(): Layout {
     return {
       q1: Math.random() > 0.5,
       q2: Math.random() > 0.5,
@@ -75,46 +79,28 @@ export class ImageQuadComponent implements OnChanges {
   }
 
   private generateLayout(): void {
-    if (!this.setting) {
-      if (this.mode === 'fullRandom') {
-        this.setting = {
-          q1: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
-          q2: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
-          q3: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
-          q4: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant()
-        };
-      } else if (this.mode === 'random') {
-        this.setting = {
-          q1: this.getRandomQuadrant(),
-          q2: this.getRandomQuadrant(),
-          q3: this.getRandomQuadrant(),
-          q4: this.getRandomQuadrant()
-        };
-        // Set one of the quadrants to be a big picture
-        const prop: keyof Setting = `q${Math.floor(Math.random() * 4) + 1}` as keyof Setting;
-        this.setting[prop] = true;
-      } else if (this.mode === 'fixedOne') {
-        this.setting = {
-          q1: true,
-          q2: { q1: true, q2: false, q3: true, q4: true },
-          q3: { q1: false, q2: true, q3: false, q4: false },
-          q4: { q1: true, q2: false, q3: true, q4: false }
-        };
-      } else if (this.mode === 'fixedTwo') {
-        this.setting = {
-          q1: true,
-          q2: { q1: true, q2: false, q3: true, q4: true },
-          q3: { q1: false, q2: false, q3: false, q4: false },
-          q4: { q1: true, q2: true, q3: false, q4: true }
-        };
-      } else if (this.mode === 'fixedThree') {
-        this.setting = {
-          q1: { q1: true, q2: true, q3: false, q4: true },
-          q2: true,
-          q3: { q1: false, q2: true, q3: false, q4: true },
-          q4: { q1: true, q2: false, q3: false, q4: true }
-        };
-      }
+    if (typeof this.mode === 'object') {
+      this.layout = this.mode as Layout;
+    }
+    else if (this.mode === 'fullRandom') {
+      this.layout = {
+        q1: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
+        q2: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
+        q3: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant(),
+        q4: Math.random() > 0.33 ? true : Math.random() > 0.6 ? false : this.getRandomQuadrant()
+      };
+    } else if (this.mode === 'random') {
+      this.layout = {
+        q1: this.getRandomQuadrant(),
+        q2: this.getRandomQuadrant(),
+        q3: this.getRandomQuadrant(),
+        q4: this.getRandomQuadrant()
+      };
+      // Set one of the quadrants to be a big picture
+      const prop: keyof Layout = `q${Math.floor(Math.random() * 4) + 1}` as keyof Layout;
+      this.layout[prop] = true;
+    } else if (['fixedOne', 'fixedTwo', 'fixedThree'].includes(this.mode)) {
+      this.layout = fixedLayouts[this.mode];
     }
   }
 }

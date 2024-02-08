@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { ImageQuadComponent, Setting } from '../../projects/image-quad/src/public-api';
+import { ImageQuadComponent, Layout } from '../../projects/image-quad/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +12,19 @@ import { ImageQuadComponent, Setting } from '../../projects/image-quad/src/publi
 })
 export class AppComponent {
   title = 'ImageBlock';
-  setting1?: Setting = {
+  setting1?: Layout = {
     q1: true, q2: true, q3: false, q4: false
   };
-  setting2?: Setting = {
+  setting2?: Layout = {
     q1: false, q2: true, q3: true, q4: false
   };
-  setting?: Setting = {
+  setting?: Layout = {
     q1:
     {
       q1: true,
       q2: true, q3: true, q4: true
     },
-    q2: true, q3: true, q4: true
+    q2: true, q3: true, q4: false
   };
 
   imagePaths1 = [
