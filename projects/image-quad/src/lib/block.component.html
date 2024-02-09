@@ -1,4 +1,4 @@
-<div [style]="getSizeAsCssStyle()">
+<div [style]="getSizeAsCssStyle()" [@simpleFadeAnimation]="{ value: '', params: { delay: delay } }">
     @if(visible) {
         <div class="shadow" [style.background]="'center / contain no-repeat url('+ imageSource +')'"></div>
     }

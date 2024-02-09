@@ -33,19 +33,27 @@ export class AppComponent {
     './assets/female_3.png',
     './assets/female_4.png',
     './assets/female_5.png',
-    './assets/female_6.png'
+    './assets/female_6.png',
+    './assets/female_7.png',
+    './assets/female_8.png',
+    './assets/male_1.png',
+    './assets/male_2.png',
+    './assets/male_3.png',
+    './assets/male_4.png',
   ];
   imagePaths2 = [
     './assets/male_1.png',
     './assets/male_2.png',
     './assets/male_3.png',
+    './assets/male_4.png',
   ];
   images?: string[] = this.imagePaths1;
 
   ngOnInit() {
-    setInterval(() => {
-      // this.images = Math.random() > 0.5 ? this.imagePaths2 : this.imagePaths1;
-      // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
-    }, 10000);
+    // setInterval(() => {
+    //   this.images = undefined;
+    //   this.images = this.imagePaths2;
+    //   // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
+    // }, 4000);
   }
 }

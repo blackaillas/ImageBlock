@@ -1,28 +1,40 @@
-<div class="q" [style.gap.px]="gap" *ngIf="layout" [@simpleFadeAnimation]="imagePaths" [@simpleFadeAnimation]="layout"
-  [@.disabled]="level > 1">
+<div class="q" [style.gap.px]="gap" *ngIf="layout">
 
-  @if (isSubType(layout.q1)) {
-  <lib-imageQuad [mode]="castToLayout(layout.q1!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
+<!-- @for (prop of layoutKeys; track $index) {
+  @if (isSubType(layout,prop)) {
+    <ngx-image-quad [mode]="castToLayout(layout, prop)" [level]="level+1" [gap]="gap" [size]="size"
+      [imagePaths]="imagePaths"></ngx-image-quad>
+    }@else {
+    <app-block [imagePaths]="imagePaths" [visible]="isVisible(layout, prop)" [size]="size" [level]="level" [gap]="gap"></app-block>
+    }
+} -->
+
+  @if (isSubType2(layout.q1)) {
+  <ngx-image-quad [mode]="castToLayout2(layout.q1!)" [level]="level+1" [gap]="gap" [size]="size"
+    [imagePaths]="imagePaths"></ngx-image-quad>
   }@else {
-  <app-block [visible]="layout.q1===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
+  <app-block [imagePaths]="imagePaths" [visible]="layout.q1===true" [size]="size" [level]="level" [gap]="gap"></app-block>
   }
 
-  @if (isSubType(layout.q2)) {
-  <lib-imageQuad [mode]="castToLayout(layout.q2!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType2(layout.q2)) {
+  <ngx-image-quad [mode]="castToLayout2(layout.q2!)" [level]="level+1" [gap]="gap" [size]="size"
+    [imagePaths]="imagePaths"></ngx-image-quad>
   }@else {
-  <app-block [visible]="layout.q2===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
+  <app-block [imagePaths]="imagePaths" [visible]="layout.q2===true" [size]="size" [level]="level" [gap]="gap"></app-block>
   }
 
-  @if (isSubType(layout.q3)) {
-  <lib-imageQuad [mode]="castToLayout(layout.q3!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType2(layout.q3)) {
+  <ngx-image-quad [mode]="castToLayout2(layout.q3!)" [level]="level+1" [gap]="gap" [size]="size"
+    [imagePaths]="imagePaths"></ngx-image-quad>
   }@else {
-  <app-block [visible]="layout.q3===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
+  <app-block [imagePaths]="imagePaths" [visible]="layout.q3===true" [size]="size" [level]="level" [gap]="gap"></app-block>
   }
 
-  @if (isSubType(layout.q4)) {
-  <lib-imageQuad [mode]="castToLayout(layout.q4!)" [level]="level+1" [gap]="gap" [size]="size" [imagePaths]="imagePaths"></lib-imageQuad>
+  @if (isSubType2(layout.q4)) {
+  <ngx-image-quad [mode]="castToLayout2(layout.q4!)" [level]="level+1" [gap]="gap" [size]="size"
+    [imagePaths]="imagePaths"></ngx-image-quad>
   }@else {
-  <app-block [visible]="layout.q4===true" [size]="size" [level]="level" [gap]="gap" [image]="getImage()"></app-block>
+  <app-block [imagePaths]="imagePaths" [visible]="layout.q4===true" [size]="size" [level]="level" [gap]="gap"></app-block>
   }
 
 </div>

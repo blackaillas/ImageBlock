@@ -1,8 +1,8 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlockComponent } from './block.component';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { fixedLayouts } from './fixed-layouts';
+import { ImageService } from './image.service';
 
 export type Mode = 'fullRandom' | 'random' | 'fixedOne' | 'fixedTwo' | 'fixedThree' | Layout;
 
@@ -17,22 +17,15 @@ export interface Layout {
  * Simple little component to display images in a grid with fashion.
  */
 @Component({
-  selector: 'lib-imageQuad',
+  selector: 'ngx-image-quad',
   standalone: true,
   imports: [CommonModule, BlockComponent],
+  providers: [ImageService],
   templateUrl: './image-quad.component.html',
   styles: `.q {
       display: grid;
       grid-template: auto auto / auto auto;
-  }`,
-  animations: [
-    trigger('simpleFadeAnimation', [
-      transition('*=>*', [
-        style({ opacity: 0 }),
-        animate('2s ease-in', style({ opacity: 1 }))
-      ])
-    ])
-  ]
+  }`
 })
 export class ImageQuadComponent implements OnChanges {
   /** Configure the behaviour of the layout with fixed predefined ones or with custom setups. 
@@ -49,24 +42,44 @@ export class ImageQuadComponent implements OnChanges {
   /** Do NOT set this manually */
   @Input() level: number = 1;
 
-  layout?: Layout = undefined;
+  private imageService: ImageService = inject(ImageService);
 
-  ngOnChanges(): void {
+  protected layout?: Layout = undefined;
+  protected layoutKeys: string[] = ['q1', 'q2', 'q3', 'q4'];
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // if (changes['imagePaths'].currentValue !== changes['imagePaths'].previousValue && this.level === 1) {
+    //   this.imagePaths = changes['imagePaths'].currentValue;
+    //   console.debug('reseted');
+    //   this.imageService.resetUsedIndexes();
+    // }
     this.generateLayout();
   }
 
-  isSubType(value?: boolean | Layout): boolean {
-    return typeof value === 'object';
+  isSubType(value: boolean | Layout, prop: string): boolean {
+    return typeof (value as Layout)[prop as keyof Layout] === 'object';
   }
 
-  castToLayout(value: boolean | Layout): Layout {
+  castToLayout(value: boolean | Layout, prop: string): Layout {
+    return (value as Layout)[prop as keyof Layout] as Layout;
+  }
+
+  isSubType2(value?: boolean | Layout): boolean {
+    return typeof (value as Layout) === 'object';
+  }
+
+  castToLayout2(value: boolean | Layout): Layout {
     return value as Layout;
   }
 
-  getImage(): string | undefined {
-    if (!this.imagePaths || this.imagePaths.length === 0) return undefined;
+  isVisible(value: boolean | Layout, prop: string): boolean {
+    return (value as Layout)[prop as keyof Layout] as boolean === true;
+  }
 
-    return this.imagePaths[(Math.floor(Math.random() * this.imagePaths.length))];
+  getImage(visible: boolean): string | undefined {
+    if (!this.imagePaths || this.imagePaths.length === 0 || !visible) return undefined;
+
+    return this.imagePaths[this.imageService.getUniqueRandomIndex(this.imagePaths.length)];
   }
 
   private getRandomQuadrant(): Layout {
@@ -79,6 +92,7 @@ export class ImageQuadComponent implements OnChanges {
   }
 
   private generateLayout(): void {
+    
     if (typeof this.mode === 'object') {
       this.layout = this.mode as Layout;
     }

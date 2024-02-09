@@ -21,31 +21,25 @@ The library is available as an npm package. To install the package run the follo
 ## API
 
 `import { ImageQuadComponent } from 'image-quad'`<br>
-`selector: lib-imageQuad`
+`selector: ngx-image-quad`
 
 ### @Inputs()
 
 | Input            | Type    | Required                   | Description                                                                                               |
 | ---------------- | ------- | -------------------------- | --------------------------------------------------------------------------------------------------------- |
-| apiURL           | string  | **YES**                    | the url of a remote server that supports http/jsonp calls.                                                |
-| delayTime        | number  | Optional, default: 300     | the debounce time for this request.                                                                       |
-| urlParams        | object  | Optional, default: {}      | { key: string, value: any} object as additional parameters                                                |
-| urlQueryParam    | string  | Optional, default: 'query' | a string value which is used a query parameter in the url. Ex: `http://localhost:3000/countries?query='c` |
-| apiMethod        | string  | Optional, default: 'get'   | the http/jsonp method to be used.                                                                         |
-| apiType          | string  | Optional, default: 'http'  | http or jsonp method types.                                                                               |
-| callbackFuncName | string  | Optional                   | a string value for the callback query parameter.                                                          |
-| allowEmptyString | boolean | Optional, default: true    | if true, it allows empty strings to pass and invoke search                                                |
+| mode           | Mode  | **YES**                    | Configure the behaviour of the layout with fixed predefined ones or with custom setups.  Also can use random layouts                                                |
+| imagePaths        | string[]  | **YES**     | The list of images that will be randomly selected. E.g.: ./assets/image.png */                                                                       |
+| size        | number  | Optional, default: 160      | Size of level 1 image in pixel            |
+| gap    | number  | Optional, default: 4 | Gap between the images in pixel |
+| level        | number  | Optional, default: 1   | Do not set this parameter manually                     |
 
-### @Outputs()
-
-| Output           | Type       | Required | Description                                            |
-| ---------------- | ---------- | -------- | ------------------------------------------------------ |
-| filteredDataList | Array<any> | **YES**  | emits filtered data list depending on the search term. |
 
 ## Usage
 
-1) Register the `NgxMatTypeaheadModule` in your app module.
- > `import { NgxMatTypeaheadModule } from 'ngx-mat-typeahead'`
+Library provides 1 standalone component, which as other modules can be imported to your application in the usual ways.
+
+1) Register the `ImageQuadComponent` in your app module.
+ > `import { ImageQuadComponent } from 'image-quad';`
 
  ```typescript
  import { HttpClientModule } from '@angular/common/http';
@@ -54,7 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxMatTypeaheadModule } from 'ngx-mat-typeahead';
+import { ImageQuadComponent } from 'image-quad';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -67,7 +61,7 @@ import { AppComponent } from './app.component';
     MatInputModule,
     MatAutocompleteModule,
     HttpClientModule,
-    NgxMatTypeaheadModule
+    ImageQuadComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -75,47 +69,26 @@ import { AppComponent } from './app.component';
 export class AppModule {}
  ```
 
- 2) Use the directive `(NgxMatTypeahead)` in your component.
+ 2) Use `(ImageQuadComponent)` in your component.
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AppService } from './app.service';
+
 @Component({
-  selector: 'mat-ta-root',
-  template: `<h3>NgxMatTypeahead demo app using Angular Material</h3>
-<div [formGroup]="testFormGroup">
-  <mat-form-field>
-    <input matInput NgxMatTypeahead [apiURL]="url" [urlQueryParam]="queryParam" (filteredDataList)="getFilteredSuggestions($event)"
-      formControlName="country" [matAutocomplete]="countryAuto" placeholder="Choose Country">
-    <mat-autocomplete #countryAuto="matAutocomplete">
-      <mat-option *ngFor="let country of countries" [value]="country">
-        {{country}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</div>
-`,
-  styleUrls: ['./app.component.css']
+  selector: 'app-root',
+  template: `<h3>ImageQuad demo app</h3>
+  <div>
+    <ngx-image-quad [mode]="'random'" [imagePaths]="imagePaths" [size]="120" [gap]="2"></ngx-image-quad>
+  </div>
+`
 })
 export class AppComponent implements OnInit {
-  // Paramteres for the input type are defined below. The url is generated using `json-server`.
-  // Please run your own instance of the json-server to use the the below url.
-  queryParam = 'q';
-  url = 'http://localhost:3000/countries';
+  imagePaths = ['./assets/image1.png','./assets/imageAB.png','./assets/image123.png'];
 
-  constructor(private appService: AppService) {}
+  constructor() {}
 
-  testFormGroup: FormGroup = new FormGroup({ country: new FormControl('') });
-  countries: Array<string> = [];
-
-  ngOnInit() {
-    this.countries = ["United States", "United Kingdom", "China", "Japan", "India", "Russia", "Canada", "Brazil"];
-  }
-
-  getFilteredSuggestions(filteredDataLst: Array<any>) {
-    this.countries = [...filteredDataLst];
-  }
 }
 ```
 
@@ -128,8 +101,4 @@ export class AppComponent implements OnInit {
 ## Build the ImageBlock module
 
 Run `ng build ImageBlock` to build the library. The build artifacts will be stored in the `dist/image-quad` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests TBD
-
-Run `ng test ImageBlock` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
