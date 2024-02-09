@@ -13,10 +13,16 @@ const defaultImage = 'data:image/png;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQAB
   styleUrl: './block.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
-    trigger('simpleFadeAnimation', [
+    trigger('fadeAnimation', [
       transition('*=>*', [
         style({ opacity: 0 }),
         animate('{{ delay }}ms ease-in', style({ opacity: 1 }))
+      ])
+    ]),
+    trigger('spinAnimation', [
+      transition('*=>*', [
+        style({ transform: 'rotateY(90deg)' }),
+        animate('{{ delay }}ms ease-in', style({ transform: 'rotateY(360deg)' }))
       ])
     ])
   ]
@@ -24,9 +30,16 @@ const defaultImage = 'data:image/png;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQAB
 export class BlockComponent {
   @Input({ required: true }) imagePaths: string[] = [];
   @Input() visible: boolean = true;
-  @Input() size: number = 160; // in px
+  @Input()
+  set size(v: number) { // in px
+    this._size = v > this.gap * 2 ? v : 160;
+  }
+
   @Input() level: number = 1;
   @Input() gap: number = 4; // in px
+  @Input() animation: 'fadeAnimation' | 'spinAnimation' | 'disabled' = 'fadeAnimation';
+
+  protected _size: number = 160;
 
   protected imageSource?: string = defaultImage;
 
@@ -41,7 +54,8 @@ export class BlockComponent {
   }
 
   getSizeAsCssStyle(): string {
-    return `width: calc(${this.size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px); height: calc(${this.size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : (this.gap / 2)}px)`;
+    return `width: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px); ` +
+           `height: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px)`;
   }
 
 }

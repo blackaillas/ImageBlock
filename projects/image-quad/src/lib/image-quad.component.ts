@@ -41,18 +41,18 @@ export class ImageQuadComponent implements OnChanges {
   @Input() gap: number = 4; // in px
   /** Do NOT set this manually */
   @Input() level: number = 1;
+  /** Select your style of animation, or simply disable it. 
+   * 
+   * @type 'fadeAnimation' | 'spinAnimation' | 'disabled'
+  */
+  @Input() animation: 'fadeAnimation' | 'spinAnimation' | 'disabled' = 'fadeAnimation';
 
   private imageService: ImageService = inject(ImageService);
 
   protected layout?: Layout = undefined;
   protected layoutKeys: string[] = ['q1', 'q2', 'q3', 'q4'];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // if (changes['imagePaths'].currentValue !== changes['imagePaths'].previousValue && this.level === 1) {
-    //   this.imagePaths = changes['imagePaths'].currentValue;
-    //   console.debug('reseted');
-    //   this.imageService.resetUsedIndexes();
-    // }
+  ngOnChanges(): void {
     this.generateLayout();
   }
 
@@ -92,7 +92,7 @@ export class ImageQuadComponent implements OnChanges {
   }
 
   private generateLayout(): void {
-    
+
     if (typeof this.mode === 'object') {
       this.layout = this.mode as Layout;
     }

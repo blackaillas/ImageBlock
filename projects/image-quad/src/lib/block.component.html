@@ -1,5 +1,8 @@
-<div [style]="getSizeAsCssStyle()" [@simpleFadeAnimation]="{ value: '', params: { delay: delay } }">
+<div [style]="getSizeAsCssStyle()" 
+    [@fadeAnimation]="animation == 'fadeAnimation' ? { value: '', params: { delay: delay } }: { value: 'void', params: { delay: 0 } }"
+    [@spinAnimation]="animation == 'spinAnimation' ? { value: '', params: { delay: delay } }: { value: 'void', params: { delay: 0 } }"
+    [@.disabled]="animation=='disabled'">
     @if(visible) {
-        <div class="shadow" [style.background]="'center / contain no-repeat url('+ imageSource +')'"></div>
+    <div class="shadow" [style.background]="'center / contain no-repeat url('+ imageSource +')'"></div>
     }
 </div>

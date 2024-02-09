@@ -1,13 +1,14 @@
 {
   "name": "image-quad",
-  "version": "0.6.0",
-  "description": "Simple little component to display images in grid.",
+  "version": "0.6.1",
+  "description": "Simple little component to display images in grid with fashion.",
   "author": "Zoltán Rajkai",
   "keywords": [
     "angular",
     "image",
     "grid",
-    "quad"
+    "quad",
+    "random"
   ],
   "license": "MIT",
   "repository": {

@@ -11,13 +11,11 @@ export class ImageService {
   }
 
   getUniqueRandomIndex(max: number): number {
-    console.debug('max', max);
     let index: number = 0;
     do {
       index = Math.floor(Math.random() * max);
     } while (ImageService.usedIndexes.includes(index) && ImageService.usedIndexes.length < max);
     ImageService.usedIndexes.push(index);
-    console.debug('usedIndexes', ImageService.usedIndexes);
     return index;
   }
 
