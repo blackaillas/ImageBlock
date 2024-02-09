@@ -234,7 +234,7 @@
   </div>
 </main>
 
-<div style="width: 100%;display: flex; justify-content: space-around;background-color: #00a1a1;;padding: 1rem; box-sizing: border-box;">
+<div class="section green">
   <div style="display: flex; flex-direction: column; justify-content: center;">
     <h1 style="color: floralwhite;">Give life for your gallery</h1>
     <ul style="color: floralwhite;">
@@ -249,7 +249,7 @@
 </div>
 
 
-<div style="width: 100%;display: flex; flex-direction: row-reverse; justify-content: space-around;padding: 1rem; box-sizing: border-box;">
+<div  class="section reverse">
   <div style="display: flex; flex-direction: column; justify-content: center;">
     <h1 style="color: grey;">Configurable</h1>
     <ul style="color: grey;">
@@ -264,7 +264,7 @@
 </div>
 
 
-<div style="width: 100%;display: flex; flex-direction: row; background-color: rgb(221, 142, 85); justify-content: space-around;padding: 1rem; box-sizing: border-box;">
+<div class="section orange">
   <div style="display: flex; flex-direction: column; justify-content: center;">
     <h1 style="color: floralwhite;">Make it your own</h1>
     <ul style="color: floralwhite;">
@@ -275,4 +275,10 @@
   @if (images) {
   <ngx-image-quad [mode]="setting!" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
   }
+</div>
+
+<div class="section">
+  <div style="display: flex; flex-direction: column; justify-content: center;">
+    {{ 'contact my if you want at blackaillas@gmail.com' }}
+  </div>
 </div>

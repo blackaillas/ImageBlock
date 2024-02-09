@@ -1,0 +1,15 @@
+.section {
+    width: 100%;display: flex; justify-content: space-around;padding: 1rem; box-sizing: border-box;
+
+    &.green {
+        background-color: #00a1a1;
+    }
+    
+    &.orange {
+        background-color: rgb(221, 142, 85);
+    }
+
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+}

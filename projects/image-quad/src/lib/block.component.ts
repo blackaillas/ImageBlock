@@ -53,9 +53,27 @@ export class BlockComponent {
     }
   }
 
+  // getSizeAsCssStyle(): string {
+  //   return `width: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px); ` +
+  //          `height: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px)`;
+  // }
+
   getSizeAsCssStyle(): string {
-    return `width: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px); ` +
-           `height: calc(${this._size / (Math.pow(2, this.level - 1))}px - ${(this.level <= 1) ? 0 : ((this.gap / 2) * (this.level - 1))}px)`;
+    return `width: ${this.calcHeightOrWidth()}px; ` +
+      `height: ${this.calcHeightOrWidth()}px`;
+  }
+
+  private calcHeightOrWidth(): number {
+    let val = this._size;
+
+    if (this.level <= 1) {
+      return val;
+    }
+
+    for (let index = 1; index < this.level; index++) {
+      val = (val / 2) - (this.gap / 2);
+    }
+    return val;
   }
 
 }
