@@ -68,6 +68,8 @@
     justify-content: space-around;
     width: 100%;
     max-width: 700px;
+    padding: 1rem;
+    box-sizing: border-box;
     margin-bottom: 3rem;
   }
 
@@ -244,7 +246,9 @@
     </ul>
   </div>
   @if (images) {
-  <ngx-image-quad [mode]="'random'" [imagePaths]="images!" [gap]="4" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'fadeAnimation'"></ngx-image-quad>
+    <div style="display: flex; align-content: center; justify-content: center; flex-wrap: wrap;">
+      <ngx-image-quad [mode]="'random'" [imagePaths]="images!" [gap]="4" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'fadeAnimation'"></ngx-image-quad>
+    </div>
   }
 </div>
 
@@ -259,7 +263,9 @@
     </ul>
   </div>
   @if (images) {
-  <ngx-image-quad [mode]="'fixedOne'" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
+    <div style="display: flex; align-content: center; justify-content: center; flex-wrap: wrap;">
+      <ngx-image-quad [mode]="'fixedOne'" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
+    </div>
   }
 </div>
 
@@ -273,12 +279,14 @@
     </ul>
   </div>
   @if (images) {
-  <ngx-image-quad [mode]="setting!" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
+    <div style="display: flex; align-content: center; justify-content: center; flex-wrap: wrap;">
+      <ngx-image-quad [mode]="setting!" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
+    </div>
   }
 </div>
 
 <div class="section">
-  <div style="display: flex; flex-direction: column; justify-content: center;">
-    {{ 'contact my if you want at blackaillas@gmail.com' }}
-  </div>
+  <p style="display: flex; flex-direction: column; justify-content: center;">
+    {{ 'contact me if you want at blackaillas@gmail.com' }}
+  </p>
 </div>

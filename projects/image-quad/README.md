@@ -27,11 +27,12 @@ The library is available as an npm package. To install the package run the follo
 
 | Input            | Type    | Required                   | Description                                                                                               |
 | ---------------- | ------- | -------------------------- | --------------------------------------------------------------------------------------------------------- |
-| mode           | Mode  | **YES**                    | Configure the behaviour of the layout with fixed predefined ones or with custom setups.  Also can use random layouts                                                |
+| mode           | Mode  | **YES**                    | Configure the behaviour of the layout with fixed predefined ones or with custom setups.  Also can use random layouts. Available values: 'random', 'fullRandom', 'fixedOne', 'fixedTwo', 'fixedThree', {q1:true, q2:false, q3:true, q4: {q1:true}}                      |
 | imagePaths        | string[]  | **YES**     | The list of images that will be randomly selected. E.g.: ./assets/image.png */                                                                       |
 | size        | number  | Optional, default: 160      | Size of level 1 image in pixel            |
 | gap    | number  | Optional, default: 4 | Gap between the images in pixel |
 | level        | number  | Optional, default: 1   | Do not set this parameter manually                     |
+| animation        | string  | Optional, default: 'fadeAnimation'   | Choose from predefined animations or disable it. Valid Values: 'fadeAnimation', 'spinAnimation', 'disabled'      |
 
 
 ## Usage

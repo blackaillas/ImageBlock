@@ -3,12 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ImageQuadComponent, Layout } from '../../projects/image-quad/src/public-api';
 
-enum ScreenSize {
-  Small,
-  Medium,
-  Large
-}
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,7 +19,7 @@ export class AppComponent {
     q1: false, q2: true, q3: true, q4: false
   };
   setting?: Layout = {
-    q1:true,
+    q1: true,
     q2: {
       q1: true, q2: true, q3: true, q4: true
     }, q3: {
@@ -64,12 +58,24 @@ export class AppComponent {
     './assets/male_4.png',
   ];
   images?: string[] = this.imagePaths1;
-  
+
   screenSize: string = 'Large screen';
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    const width = (event.target as Window).innerWidth;
+    this.setResponsiveSize(event);
+  }
+  ngOnInit() {
+    this.setResponsiveSize(undefined);
+    setInterval(() => {
+      //this.images = undefined;
+      this.images = this.images!.length > 5 ? this.imagePaths2 : this.imagePaths1;
+      // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
+    }, 4000);
+  }
+
+  private setResponsiveSize(event?: Event) {
+    const width = event ? (event.target as Window).innerWidth : window.innerWidth;
 
     if (width < 576) {
       this.screenSize = 'Small screen';
@@ -79,24 +85,6 @@ export class AppComponent {
       this.screenSize = 'Large screen';
     }
   }
-  ngOnInit() {
-    // setInterval(() => {
-    //   this.images = undefined;
-    //   this.images = this.imagePaths2;
-    //   // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
-    // }, 4000);
-  }
-
-  getScreenSize(): ScreenSize {
-    const width = window.innerWidth;
-
-    if (width < 576) {
-      return ScreenSize.Small;
-    } else if (width >= 576 && width < 992) {
-      return ScreenSize.Medium;
-    } else {
-      return ScreenSize.Large;
-    }
-  }
-
 }
+
+

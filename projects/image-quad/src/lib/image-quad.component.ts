@@ -52,8 +52,12 @@ export class ImageQuadComponent implements OnChanges {
   protected layout?: Layout = undefined;
   protected layoutKeys: string[] = ['q1', 'q2', 'q3', 'q4'];
 
-  ngOnChanges(): void {
-    this.generateLayout();
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['mode'] || changes['imagePaths']) {
+      this.generateLayout();
+    }
   }
 
   isSubType(value: boolean | Layout, prop: string): boolean {
@@ -114,7 +118,7 @@ export class ImageQuadComponent implements OnChanges {
       const prop: keyof Layout = `q${Math.floor(Math.random() * 4) + 1}` as keyof Layout;
       this.layout[prop] = true;
     } else if (['fixedOne', 'fixedTwo', 'fixedThree'].includes(this.mode)) {
-      this.layout = fixedLayouts[this.mode];
+      this.layout = { ...fixedLayouts[this.mode] };
     }
   }
 }
