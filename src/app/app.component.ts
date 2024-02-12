@@ -67,11 +67,10 @@ export class AppComponent {
   }
   ngOnInit() {
     this.setResponsiveSize(undefined);
-    setInterval(() => {
-      //this.images = undefined;
-      this.images = this.images!.length > 5 ? this.imagePaths2 : this.imagePaths1;
-      // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
-    }, 4000);
+    // setInterval(() => {
+    //   this.images = this.images!.length > 5 ? this.imagePaths2 : this.imagePaths1;
+    //   // this.setting = {q1: {q1: {q1: true, q2:true, q3: false, q4: false}, q2: true, q3: true, q4: true},q2:true, q3:true, q4:true};
+    // }, 12000);
   }
 
   private setResponsiveSize(event?: Event) {

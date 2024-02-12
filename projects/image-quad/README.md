@@ -32,7 +32,7 @@ The library is available as an npm package. To install the package run the follo
 | size        | number  | Optional, default: 160      | Size of level 1 image in pixel            |
 | gap    | number  | Optional, default: 4 | Gap between the images in pixel |
 | level        | number  | Optional, default: 1   | Do not set this parameter manually                     |
-| animation        | string  | Optional, default: 'fadeAnimation'   | Choose from predefined animations or disable it. Valid Values: 'fadeAnimation', 'spinAnimation', 'disabled'      |
+| animation        | string  | Optional, default: 'fadeAnimation'   | Choose from predefined animations or disable it. Valid Values: 'fadeAnimation', 'spinAnimation', 'scaleAnimation', 'vortexAnimation', 'disabled'      |
 
 
 ## Usage
@@ -93,3 +93,15 @@ export class AppComponent implements OnInit {
 }
 ```
 
+### Configs
+As a minimum, you need to specify `mode` and `imagePaths`:
+```
+<ngx-image-quad [mode]="'random'" [imagePaths]="imagePaths"></ngx-image-quad>
+```
+
+
+
+For responsiveness you can detect screen size and set `size` parameter accordingly:
+```
+<ngx-image-quad [mode]="setting!" [imagePaths]="images!" [size]="screenSize == 'Small screen'? 60 : 200" [animation]="'spinAnimation'"></ngx-image-quad>
+```

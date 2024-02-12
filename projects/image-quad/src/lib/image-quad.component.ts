@@ -43,16 +43,14 @@ export class ImageQuadComponent implements OnChanges {
   @Input() level: number = 1;
   /** Select your style of animation, or simply disable it. 
    * 
-   * @type 'fadeAnimation' | 'spinAnimation' | 'disabled'
+   * @type 'fadeAnimation' | 'spinAnimation' | 'scaleAnimation' | 'vortexAnimation' | 'disabled'
   */
-  @Input() animation: 'fadeAnimation' | 'spinAnimation' | 'disabled' = 'fadeAnimation';
+  @Input() animation: 'fadeAnimation' | 'spinAnimation' | 'scaleAnimation' | 'vortexAnimation' | 'disabled' = 'fadeAnimation';
 
   private imageService: ImageService = inject(ImageService);
 
   protected layout?: Layout = undefined;
   protected layoutKeys: string[] = ['q1', 'q2', 'q3', 'q4'];
-
-
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['mode'] || changes['imagePaths']) {
@@ -80,12 +78,6 @@ export class ImageQuadComponent implements OnChanges {
     return (value as Layout)[prop as keyof Layout] as boolean === true;
   }
 
-  getImage(visible: boolean): string | undefined {
-    if (!this.imagePaths || this.imagePaths.length === 0 || !visible) return undefined;
-
-    return this.imagePaths[this.imageService.getUniqueRandomIndex(this.imagePaths.length)];
-  }
-
   private getRandomQuadrant(): Layout {
     return {
       q1: Math.random() > 0.5,
@@ -96,7 +88,7 @@ export class ImageQuadComponent implements OnChanges {
   }
 
   private generateLayout(): void {
-
+    this.imageService.resetUsedIndexes();
     if (typeof this.mode === 'object') {
       this.layout = this.mode as Layout;
     }

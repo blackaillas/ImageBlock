@@ -1,4 +1,4 @@
-<div class="q" [style.gap.px]="gap" *ngIf="layout">
+<div class="q" [style.gap.px]="gap" *ngIf="layout && imagePaths?.length">
 
 @for (prop of layoutKeys; track $index) {
   @if (isSubType(layout,prop)) {
