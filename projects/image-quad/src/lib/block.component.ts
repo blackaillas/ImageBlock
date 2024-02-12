@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, inject } from '@angular/core';
 import { ImageService } from './image.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -28,18 +28,18 @@ const defaultImage = 'data:image/png;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQAB
     trigger('scaleAnimation', [
       transition('*=>*', [
         style({ transform: 'scale3d(0,0,0)' }),
-        animate('{{ delay }}ms ease-in', style({  transform: 'scale3d(1, 1, 1)' }))
+        animate('{{ delay }}ms ease-in', style({ transform: 'scale3d(1, 1, 1)' }))
       ])
     ]),
     trigger('vortexAnimation', [
       transition('*=>*', [
         style({ transform: 'scale3d(0,0,0)  rotateZ(0deg)' }),
-        animate('{{ delay }}ms ease-in', style({  transform: 'scale3d(1, 1, 1)  rotateZ(720deg)' }))
+        animate('{{ delay }}ms ease-in', style({ transform: 'scale3d(1, 1, 1)  rotateZ(720deg)' }))
       ])
     ])
   ]
 })
-export class BlockComponent {
+export class BlockComponent implements OnChanges {
   @Input({ required: true }) imagePaths: string[] = [];
   @Input() visible: boolean = true;
   @Input()

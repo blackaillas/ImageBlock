@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BlockComponent } from '../../projects/image-quad/src/lib/block.component';
+import { BlockComponent } from './block.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('BlockComponent', () => {
@@ -27,7 +27,7 @@ describe('BlockComponent', () => {
     expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
   });
 
-  it('should calculate width and height correctly when size is too low (lower than gap*2)', () => {
+  it('should calculate width and height correctly when size is too low (lower than 1)', () => {
     component.size = 200;
     expect(component.getSizeAsCssStyle()).toEqual('width: 200px; height: 200px');
     component.size = 40;
@@ -37,28 +37,11 @@ describe('BlockComponent', () => {
     component.size = -1;
     expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
     component.size = 7;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
-    component.size = 8;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
-    component.size = 10;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 10px; height: 10px');
-  });
-
-  it('should calculate width and height correctly when size is too low (lower than gap*2) and gap is custom', () => {
-    component.size = 200;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 200px; height: 200px');
-    component.size = 40;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 40px; height: 40px');
-    component.size = 0;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
-    component.size = -1;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
-    component.gap = 1;
+    expect(component.getSizeAsCssStyle()).toEqual('width: 7px; height: 7px');
     component.size = 8;
     expect(component.getSizeAsCssStyle()).toEqual('width: 8px; height: 8px');
-    component.gap = 10;
     component.size = 10;
-    expect(component.getSizeAsCssStyle()).toEqual('width: 160px; height: 160px');
+    expect(component.getSizeAsCssStyle()).toEqual('width: 10px; height: 10px');
   });
 
   it('should calculate width and height correctly when level increases', () => {

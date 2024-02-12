@@ -1,8 +1,12 @@
 {
   "name": "image-quad",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Simple little component to display images in grid with fashion.",
   "author": "Zoltán Rajkai",
+  "scripts": {
+    "test": "ng test",
+    "build-lib": "ng build ImageQuad --configuration production"
+  },
   "keywords": [
     "angular",
     "image",
