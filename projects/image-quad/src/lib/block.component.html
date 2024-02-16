@@ -1,4 +1,4 @@
-<div [style]="getSizeAsCssStyle()" 
+<div [style.width.px]="calcSizeForLevel()" [style.height.px]="calcSizeForLevel()" 
     [@fadeAnimation]="animation == 'fadeAnimation' ? { value: '', params: { delay: delay } }: { value: 'void', params: { delay: 0 } }"
     [@spinAnimation]="animation == 'spinAnimation' ? { value: '', params: { delay: delay } }: { value: 'void', params: { delay: 0 } }"
     [@scaleAnimation]="animation == 'scaleAnimation' ? { value: '', params: { delay: delay } }: { value: 'void', params: { delay: 0 } }"

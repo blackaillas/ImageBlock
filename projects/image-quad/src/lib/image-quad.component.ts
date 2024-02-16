@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlockComponent } from './block.component';
 import { fixedLayouts } from './fixed-layouts';
@@ -25,7 +25,8 @@ export interface Layout {
   styles: `.q {
       display: grid;
       grid-template: auto auto / auto auto;
-  }`
+  }`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ImageQuadComponent implements OnChanges {
   /** Configure the behaviour of the layout with fixed predefined ones or with custom setups. 

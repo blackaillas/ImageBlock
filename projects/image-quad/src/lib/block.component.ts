@@ -59,18 +59,13 @@ export class BlockComponent implements OnChanges {
 
   imageService: ImageService = inject(ImageService);
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (this.visible) {
       this.imageSource = this.imagePaths[this.imageService.getUniqueRandomIndex(this.imagePaths.length)];
     }
   }
 
-  getSizeAsCssStyle(): string {
-    return `width: ${this.calcHeightOrWidth()}px; ` +
-      `height: ${this.calcHeightOrWidth()}px`;
-  }
-
-  private calcHeightOrWidth(): number {
+  protected calcSizeForLevel(): number {
     let val = this._size;
 
     if (this.level <= 1) {
