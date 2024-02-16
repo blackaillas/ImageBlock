@@ -1,6 +1,6 @@
 {
   "name": "image-block",
-  "version": "0.5.0",
+  "version": "0.6.2",
   "description": "Simple little component to display images in grid.",
   "author": "Zoltán Rajkai",
   "keywords": [
@@ -19,6 +19,9 @@
     "build-lib": "ng build ImageQuad --configuration production --watch"
   },
   "private": false,
+  "engines": {
+    "node": ">=18.13.0"
+  },
   "dependencies": {
     "@angular/animations": "^17.0.0",
     "@angular/common": "^17.0.0",
