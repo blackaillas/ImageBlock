@@ -10,7 +10,7 @@ This library was created with the latest angular version and is tested against a
 
 ## Examples/Demo
 
-* A simple Example can be found under `src/app` directory of this repository. 
+* A simple Example can be found on Azure: https://proud-dune-0a9216403.4.azurestaticapps.net. 
 
 ## Installation of the library
 

@@ -1,4 +1,4 @@
-## NgxMatTypeahead - v0.6.2 (2024-FEB-11)
+## NgxMatTypeahead - v1.0.0 (2024-FEB-18)
 
 ### New Features:
 

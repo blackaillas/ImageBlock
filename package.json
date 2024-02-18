@@ -1,6 +1,6 @@
 {
   "name": "image-block",
-  "version": "0.6.2",
+  "version": "1.0.0",
   "description": "Simple little component to display images in grid.",
   "author": "Zoltán Rajkai",
   "keywords": [
