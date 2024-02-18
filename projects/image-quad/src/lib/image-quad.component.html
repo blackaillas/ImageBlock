@@ -1,11 +1,11 @@
 <div class="q" [style.gap.px]="gap" *ngIf="layout && imagePaths?.length">
 
 @for (prop of layoutKeys; track $index) {
-  @if (isSubType(layout,prop)) {
-    <ngx-image-quad [mode]="castToLayout(layout, prop)" [level]="level+1" [gap]="gap" [size]="size" [animation]="animation"
-      [imagePaths]="imagePaths"></ngx-image-quad>
+  @if (isLayout(layout, prop)) {
+        <ngx-image-quad [mode]="castToLayout(layout, prop)" [level]="level+1" [gap]="gap" [size]="size" [animation]="animation"
+        [imagePaths]="imagePaths"></ngx-image-quad>
     }@else {
-    <app-block [imagePaths]="imagePaths" [visible]="isVisible(layout, prop)" [size]="size" [level]="level" [gap]="gap" [animation]="animation"></app-block>
+        <app-block [imagePaths]="imagePaths" [visible]="isVisible(layout, prop)" [size]="size" [level]="level" [gap]="gap" [animation]="animation"></app-block>
     }
 }
 

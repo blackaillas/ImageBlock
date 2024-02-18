@@ -59,7 +59,7 @@ export class ImageQuadComponent implements OnChanges {
     }
   }
 
-  protected isSubType(value: boolean | Layout, prop: string): boolean {
+  protected isLayout(value: boolean | Layout, prop: string): boolean {
     return typeof (value as Layout)[prop as keyof Layout] === 'object';
   }
 

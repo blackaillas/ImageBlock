@@ -16,7 +16,6 @@ export class ImageService {
       index = Math.floor(Math.random() * max);
     } while (ImageService.usedIndexes.includes(index) && ImageService.usedIndexes.length < max);
     ImageService.usedIndexes.push(index);
-    console.log(ImageService.usedIndexes, max);
     return index;
   }
 
